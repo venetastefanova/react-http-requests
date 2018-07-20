@@ -26,6 +26,9 @@ class FullPost extends Component {
             
         }
         if(this.state.loadedPost){
+            if(this.props.id !== this.state.loadedPost.id){// without this check, it flashes the loading only once in the beginning
+                let post = <p style={{textAlign: 'center'}}>Loading...</p>;              
+            }
             post = (
                 <div className="FullPost">
                     <h1>{this.state.loadedPost.title}</h1>
