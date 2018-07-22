@@ -13,7 +13,7 @@ class Blog extends Component {
     }
     //this method is the right place to do AJAX call
     componentDidMount(){
-        axios.get("https://jsonplaceholder.typicode.com/posts")
+        axios.get("/posts")
         .then(response=>{
             //gets the first 4 posts
             const posts = response.data.slice(0,4);
