@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
-import axios from '../../axios'; // gets the new instance created
-import Post from '../../components/Post/Post';
+
 import './Blog.css';
 import Posts from './Posts/Posts';
 
