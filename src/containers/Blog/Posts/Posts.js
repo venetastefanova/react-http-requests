@@ -14,6 +14,7 @@ class Posts extends Component {
     
     //this method is the right place to do AJAX call
     componentDidMount(){
+        console.log(this.props);
         axios.get("/posts")
         .then(response=>{
             //gets the first 4 posts
