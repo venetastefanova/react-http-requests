@@ -9,9 +9,15 @@ class FullPost extends Component {
     //changing to component DidMount because now we are not updating it, but adding or removing it from the DOM
     componentDidMount(){
         console.log(this.props); // checking what props it passes so we can pass the id
+        this.loadData();        
+    }
+    componentDidUpdate(){
+        this.loadData();    
+    }
+    loadData(){
         if(this.props.match.params.id){ // avoids creating infinity loop
             //we make the request if we dont have the loaded post OR if we do have it, but the IDs is different
-            if(!this.state.loadedPost || (this.state.loadedPost.id !== this.props.id)){
+            if(!this.state.loadedPost || (this.state.loadedPost.id !== + this.props.match.params.id)){
                 axios.get("/posts/" + this.props.match.params.id)
                 .then(response=>{
                     this.setState({loadedPost:response.data});
@@ -19,24 +25,22 @@ class FullPost extends Component {
             }
             
         }
-        
     }
-
     // deleting the selected  post, by passing id as props
     deletePostHandler = () => {
-        axios.delete("/posts/" + this.props.id)
+        axios.delete("/posts/" +  this.props.match.params.id)
             .then(response=> {
                 console.log(response);
             });
     }
     render () {
         let post = <p style={{textAlign: 'center'}}>Please select a Post!</p>;
-        if(this.props.id){
+        if( this.props.match.params.id){
             let post = <p style={{textAlign: 'center'}}>Loading...</p>;
             
         }
         if(this.state.loadedPost){
-            if(this.props.id !== this.state.loadedPost.id){// without this check, it flashes the loading only once in the beginning
+            if( this.props.match.params.id !== this.state.loadedPost.id){// without this check, it flashes the loading only once in the beginning
                 let post = <p style={{textAlign: 'center'}}>Loading...</p>;              
             }
             post = (
