@@ -6,11 +6,13 @@ class FullPost extends Component {
     state = {
         loadedPost: null
     }
-    componentDidUpdate(){
-        if(this.props.id){ // avoids creating infinity loop
+    //changing to component DidMount because now we are not updating it, but adding or removing it from the DOM
+    componentDidMount(){
+        console.log(this.props); // checking what props it passes so we can pass the id
+        if(this.props.match.params.id){ // avoids creating infinity loop
             //we make the request if we dont have the loaded post OR if we do have it, but the IDs is different
             if(!this.state.loadedPost || (this.state.loadedPost.id !== this.props.id)){
-                axios.get("/posts/" + this.props.id)
+                axios.get("/posts/" + this.props.match.params.id)
                 .then(response=>{
                     this.setState({loadedPost:response.data});
                 });
