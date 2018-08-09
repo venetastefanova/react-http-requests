@@ -8,7 +8,7 @@ class NewPost extends Component {
         title: '',
         content: '',
         author: 'Veneta',
-        submitted:false
+        submitted:false,
     }
     // posting data to the server
     postDataHandler = () =>{
@@ -26,10 +26,10 @@ class NewPost extends Component {
     }
 
     render () {
-        // let redirect = null;
-        // if(this.state.submitted){
-        //     redirect = <Redirect to="/posts"/>
-        // }
+        let redirect = null;
+        if(this.state.submitted){
+            redirect = <Redirect to="/posts"/>
+        }
 
         return (
             <div className="NewPost">
